@@ -1,0 +1,23 @@
+services:
+  dashboard:
+    image: ghcr.io/ccawmiku/dashboard:v1.0.0
+    restart: unless-stopped
+    init: true
+    ports:
+      - '${DASHBOARD_BIND:-127.0.0.1}:3000:3000'
+    environment:
+      NTP_SERVERS: ${NTP_SERVERS:-ntp.aliyun.com,time.cloudflare.com}
+      NTP_PORT: ${NTP_PORT:-123}
+      NTP_TIMEOUT_MS: ${NTP_TIMEOUT_MS:-3000}
+      NTP_POLL_MS: ${NTP_POLL_MS:-300000}
+      NTP_STALE_MS: ${NTP_STALE_MS:-900000}
+      CLOCK_TIMEZONE: ${CLOCK_TIMEZONE:-Asia/Shanghai}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    volumes:
+      - dashboard-data:/data
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+volumes:
+  dashboard-data:

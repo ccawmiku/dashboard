@@ -1,0 +1,229 @@
+:root {
+  color-scheme: dark;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  color: #eeeeea;
+  background: #111312;
+  font-synthesis: none;
+  --card-radius: 30px;
+  --card-border: #3d4438;
+  --card-bg: linear-gradient(145deg, #30372b, #242a22);
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 280px;
+  background: radial-gradient(ellipse at 20% 0%, #26302430, transparent 55%);
+  min-height: 100vh;
+}
+a {
+  color: inherit;
+}
+a:focus-visible {
+  outline: 2px solid #c9ed9b;
+  outline-offset: 7px;
+  border-radius: 3px;
+}
+.shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 48px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff0d;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 22px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: -0.7px;
+}
+.brand-dot,
+.title-dot {
+  color: #c4e2a4;
+}
+.brand-mark {
+  display: grid;
+  grid-template-columns: 7px 7px;
+  gap: 3px;
+}
+.brand-mark i {
+  width: 7px;
+  height: 7px;
+  background: #c4e2a4;
+  border-radius: 2px;
+}
+.brand-mark i:last-child {
+  opacity: 0.4;
+}
+.edition {
+  font-size: 10px;
+  letter-spacing: 2.4px;
+  color: #818c7d;
+}
+.intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin: 66px 0 52px;
+}
+.eyebrow {
+  color: #9aa68f;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  margin: 0 0 18px;
+}
+h1 {
+  font-size: 38px;
+  font-weight: 450;
+  letter-spacing: 1px;
+  margin: 0 0 14px;
+}
+.description {
+  color: #90968c;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+.connection {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: #a1a99a;
+  margin-bottom: 2px;
+  white-space: nowrap;
+}
+.connection-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #d8b584;
+}
+.connection-dot[data-ok='true'] {
+  background: #b7d69a;
+  box-shadow: 0 0 9px #b7d69a22;
+}
+.section-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  color: #a2aa9c;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+.section-label span:last-child {
+  font-size: 9px;
+  color: #687163;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 280px));
+  gap: 20px;
+  align-items: start;
+}
+.loading-card,
+.error-card {
+  aspect-ratio: 1;
+  border-radius: 30px;
+  border: 1px solid #3b3e39;
+  background: #252a23;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #adb5a6;
+  font-size: 13px;
+  padding: 20px;
+}
+.loading-card small {
+  font-size: 11px;
+  color: #8b9681;
+}
+.loading-icon {
+  font-size: 36px;
+  color: #c4d5b2;
+}
+footer {
+  margin-top: auto;
+  padding: 100px 0 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  color: #697262;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+.footer-version {
+  font-size: 9px;
+  letter-spacing: 1.3px;
+  white-space: nowrap;
+}
+.footer-version span {
+  color: #424b3d;
+  margin: 0 8px;
+}
+.preview-nav {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #a2ad98;
+  margin-top: 24px;
+}
+.preview-nav p {
+  flex-basis: 100%;
+  font-size: 11px;
+}
+.preview-nav a[aria-current] {
+  color: #d4edb7;
+}
+@media (max-width: 600px) {
+  .shell {
+    padding: 0 24px;
+  }
+  .header {
+    height: 86px;
+  }
+  .edition {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .intro {
+    margin: 42px 0 34px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  h1 {
+    font-size: 32px;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 280px);
+  }
+  footer {
+    flex-direction: column;
+    padding-top: 70px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

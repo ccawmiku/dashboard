@@ -1,6 +1,6 @@
 services:
   dashboard:
-    image: ghcr.io/ccawmiku/dashboard:v1.0.0
+    image: ghcr.io/ccawmiku/dashboard:v1.0.1
     restart: unless-stopped
     init: true
     ports:

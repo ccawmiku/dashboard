@@ -1,6 +1,9 @@
-FROM node:24.15.0-bookworm-slim AS build
+FROM node:24.15.0-bookworm-slim AS toolchain
 WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends python3 make g++ && rm -rf /var/lib/apt/lists/*
 RUN npm install --global pnpm@11.19.0
+
+FROM toolchain AS build
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps ./apps
 COPY packages ./packages
@@ -10,12 +13,16 @@ COPY tsconfig.json tsup.config.ts ./
 RUN pnpm install --frozen-lockfile
 RUN pnpm build
 
+FROM toolchain AS production-dependencies
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --prod --frozen-lockfile
+
 FROM node:24.15.0-bookworm-slim AS runtime
 ENV NODE_ENV=production HOST=0.0.0.0 PORT=3000 DATABASE_PATH=/data/dashboard.sqlite
 WORKDIR /app
-RUN npm install --global pnpm@11.19.0 && mkdir /data && chown node:node /data
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-RUN pnpm install --prod --frozen-lockfile
+RUN mkdir /data && chown node:node /data
+COPY package.json ./
+COPY --from=production-dependencies /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 USER node
 EXPOSE 3000

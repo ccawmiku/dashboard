@@ -49,7 +49,7 @@ pnpm start
 
 ## Docker 部署
 
-GitHub Actions 构建并发布版本镜像。首版镜像目标是 `ghcr.io/ccawmiku/dashboard:v1.0.0`，平台为 `linux/amd64`。发布是否完成见 Actions 和验证记录。
+GitHub Actions 构建并发布版本镜像。当前镜像目标是 `ghcr.io/ccawmiku/dashboard:v1.0.1`，平台为 `linux/amd64`。发布是否完成见 Actions 和验证记录。
 
 ```sh
 docker compose pull

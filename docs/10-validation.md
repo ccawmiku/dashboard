@@ -18,6 +18,8 @@
 
 ## 远程验证入口
 
+v1.0.0 的 GitHub Linux verify 作业（类型、构建、19 项单元/接口、3 项浏览器测试及审计）通过；容器安装 SQLite 原生依赖时因精简镜像缺少编译工具失败。v1.0.1 将 Python / make / g++ 放入专用工具链阶段，生产镜像仅复制运行依赖，不携带编译器。该修复由新的标签流程复核。
+
 - [GitHub Actions](https://github.com/ccawmiku/dashboard/actions/workflows/ci.yml)：检查目标版本的 verify 与 container 两个作业，发布步骤只在版本标签触发。
 - [镜像包](https://github.com/ccawmiku/dashboard/pkgs/container/dashboard)：查看版本、摘要和可见性。
 - [实际运行截图](assets/demo.png)：来自原生生产服务器和真实 NTP，同步源为 ntp.aliyun.com，非模拟预览。

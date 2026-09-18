@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { version } from '../../../package.json';
 import { DigitalClock } from '../../../widgets/digital-clock/src/index';
 import {
   fixture,
@@ -135,7 +136,7 @@ export function App() {
       <footer>
         <span>留一点空间，给接下来的生活。</span>
         <span className="footer-version">
-          DASHBOARD <span>/</span> V1.0.0
+          DASHBOARD <span>/</span> V{version}
         </span>
       </footer>
     </main>

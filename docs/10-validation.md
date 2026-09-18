@@ -11,14 +11,16 @@
 | 实际 NTP 来源测试         | ntp.aliyun.com 成功，采样 RTT 约 22–47ms；time.cloudflare.com 当前网络超时 |
 | 依赖安全审计              | pnpm audit 全依赖 0 已知漏洞；包含开发依赖                                 |
 | 提交前秘密扫描            | Gitleaks 8.30.1，暂存区扫描未发现秘密；工具下载校验 SHA256                 |
-| GitHub 容器构建和烟雾测试 | 每次标签发布前执行，见下方实时 Actions 链接                                |
-| GHCR 公共可见性           | 首次推送镜像后核验，见 GitHub package 页面                                 |
+| GitHub 容器构建和烟雾测试 | v1.0.1 全部通过：UDP NTP、API、静态网页、非 root 和 GHCR 发布              |
+| GHCR 公共可见性           | 匿名获取 v1.0.1 manifest 返回 HTTP 200，未登录包页面显示 Public            |
 
 本地不执行 Docker。CI 中的确定性 NTP fixture 用于证明容器 UDP 链路，不等同于证明所有服务器网络都能访问公共 NTP。
 
 ## 远程验证入口
 
-v1.0.0 的 GitHub Linux verify 作业（类型、构建、19 项单元/接口、3 项浏览器测试及审计）通过；容器安装 SQLite 原生依赖时因精简镜像缺少编译工具失败。v1.0.1 将 Python / make / g++ 放入专用工具链阶段，生产镜像仅复制运行依赖，不携带编译器。该修复由新的标签流程复核。
+v1.0.0 的 GitHub Linux verify 作业（类型、构建、19 项单元/接口、3 项浏览器测试及审计）通过；容器安装 SQLite 原生依赖时因精简镜像缺少编译工具失败。v1.0.1 将 Python / make / g++ 放入专用工具链阶段，生产镜像仅复制运行依赖，不携带编译器。[修复版本完整工作流](https://github.com/ccawmiku/dashboard/actions/runs/35365973269) 已成功完成，2026-09-19（Asia/Shanghai）核验。
+
+已验证的 v1.0.1 镜像索引摘要：`sha256:eabe967754b29064b7799346cf46fe285b1af6f56e90b921111c04cbc3c217a1`。v1.0.2 补全此验证记录并同步交付版本信息，继续通过相同发布门禁；目标版本结果以对应 Actions 为准。
 
 - [GitHub Actions](https://github.com/ccawmiku/dashboard/actions/workflows/ci.yml)：检查目标版本的 verify 与 container 两个作业，发布步骤只在版本标签触发。
 - [镜像包](https://github.com/ccawmiku/dashboard/pkgs/container/dashboard)：查看版本、摘要和可见性。
